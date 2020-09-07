@@ -69,4 +69,16 @@ router.post('/:id/comments', (req, res) => {
     })
 })
 
+///----------------------Delete Requests---------------------///
+router.delete('/:id', (req, res) => {
+    dataEntries.remove(req.params.id)
+    .then(entry => {
+        res.status(200).json(entry)
+    })
+    .catch(err => {
+        res.status(400).json({ message: "The post with the specified ID does not exist." })
+        res.status(500).json({ error: "The post could not be removed" })
+    })
+})
+
 module.exports = router;
